@@ -8,6 +8,7 @@ from models import BaselineLSTM
 torch.manual_seed(0)
 numpy.random.seed(0)
 
+
 def get_args():
     parser = argparse.ArgumentParser(description='Train an RNN Baseline.')
     parser.add_argument('--clean_path', default='../speech-enhancement-asr/data/LibriSpeech/dev-clean/',
@@ -41,10 +42,11 @@ def main():
 
     train(train_loader)
 
+
 def train(train_loader):
     model = BaselineLSTM()
     for epoch in range(300):
-        for inputs, outputs in train_loader:
+        for inputs, outputs in enumerate(train_loader):
             print('inputs', inputs)
             # Step 1. Remember that Pytorch accumulates gradients.
             # We need to clear them out before each instance
@@ -64,6 +66,7 @@ def train(train_loader):
             # loss = loss_function(tag_scores, targets)
             # loss.backward()
             # optimizer.step()
+
 
 if __name__ == '__main__':
     main()
